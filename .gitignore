@@ -23,3 +23,6 @@ go.work
 # Jetbrains
 .DS_Store
 .idea
+
+# Airm
+/tmp

@@ -1,0 +1,12 @@
+version: "3.6"
+
+services:
+  web:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: dev
+    volumes:
+      - .:/opt/app
+    ports:
+      - "8080:8080"
