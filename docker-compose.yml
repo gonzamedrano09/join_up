@@ -1,12 +1,41 @@
-version: "3.6"
+version: "3.8"
 
 services:
   web:
+    container_name: join-up-backend
     build:
       dockerfile: Dockerfile
       context: .
       target: dev
     volumes:
-      - .:/opt/app
+      - .:/src
     ports:
       - "8080:8080"
+
+  mongo:
+    image: mongo:6.0.8
+    container_name: join-up-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - dbdata:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+
+  mongo-express:
+    image: mongo-express:1.0.0-alpha
+    container_name: join-up-mongo-express
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_AUTH_USERNAME=${MONGODB_USERNAME}
+      - ME_CONFIG_MONGODB_AUTH_PASSWORD=${MONGODB_PASSWORD}
+      - ME_CONFIG_MONGODB_URL=mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@mongo:27017/
+    restart: unless-stopped
+    depends_on:
+      - mongo
+
+
+volumes:
+  dbdata:
