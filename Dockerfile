@@ -2,7 +2,7 @@ FROM golang:1.20-alpine as base
 
 FROM base as dev
 
-WORKDIR /opt/app
+WORKDIR /src
 COPY . .
 
 RUN go install github.com/cosmtrek/air@latest

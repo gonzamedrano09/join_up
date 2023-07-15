@@ -1,7 +1,20 @@
 package main
 
-import "fmt"
+import (
+	"log"
+	"net/http"
+)
 
 func main() {
-	fmt.Println("Hello world")
+	// Create API
+	api := NewAPI()
+
+	// Create server
+	mux := http.NewServeMux()
+
+	// Define routes
+	mapRoutes(api, mux)
+
+	// Listen
+	log.Fatal(http.ListenAndServe(":8080", mux))
 }
