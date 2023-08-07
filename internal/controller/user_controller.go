@@ -6,7 +6,6 @@ import (
 )
 
 type UserController interface {
-	BaseController
 	Login(w http.ResponseWriter, r *http.Request)
 	Create(w http.ResponseWriter, r *http.Request)
 	Update(w http.ResponseWriter, r *http.Request)
@@ -17,10 +16,6 @@ type userController struct {
 
 func NewUserController() UserController {
 	return &userController{}
-}
-
-func (uc userController) HandleRequest(w http.ResponseWriter, r *http.Request) {
-	log.Println("User Request Handler")
 }
 
 func (uc userController) Login(w http.ResponseWriter, r *http.Request) {

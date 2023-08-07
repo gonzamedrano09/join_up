@@ -3,18 +3,20 @@ package main
 import (
 	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func main() {
 	// Create API
 	api := NewAPI()
 
-	// Create server
-	mux := http.NewServeMux()
+	// Create router
+	r := mux.NewRouter()
 
 	// Define routes
-	mapRoutes(api, mux)
+	mapRoutes(api, r)
 
 	// Listen
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	log.Fatal(http.ListenAndServe(":8080", r))
 }

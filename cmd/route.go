@@ -1,11 +1,14 @@
 package main
 
 import (
-	"net/http"
+	"github.com/gorilla/mux"
 )
 
-func mapRoutes(api *API, m *http.ServeMux) {
+func mapRoutes(api *API, r *mux.Router) {
 
-	m.HandleFunc("/users", api.UserController.HandleRequest)
+	// Users
+	r.HandleFunc("/login", api.UserController.Login).Methods("POST")
+	r.HandleFunc("/users", api.UserController.Create).Methods("POST")
+	r.HandleFunc("/users", api.UserController.Update).Methods("PUT")
 
 }
