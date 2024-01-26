@@ -13,7 +13,7 @@ services:
       - "8080:8080"
 
   mongo:
-    image: mongo:6.0.8
+    image: mongo:6.0.13
     container_name: join-up-mongo
     ports:
       - "27017:27017"
@@ -24,13 +24,13 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
 
   mongo-express:
-    image: mongo-express:1.0.0-alpha
+    image: mongo-express:1.0.2
     container_name: join-up-mongo-express
     ports:
       - "8081:8081"
     environment:
-      - ME_CONFIG_MONGODB_AUTH_USERNAME=${MONGODB_USERNAME}
-      - ME_CONFIG_MONGODB_AUTH_PASSWORD=${MONGODB_PASSWORD}
+      - ME_CONFIG_BASICAUTH_USERNAME=${MONGODB_USERNAME}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${MONGODB_PASSWORD}
       - ME_CONFIG_MONGODB_URL=mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@mongo:27017/
     restart: unless-stopped
     depends_on:
