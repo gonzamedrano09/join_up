@@ -1,6 +1,8 @@
 package main
 
-import "main/internal/controller"
+import (
+	"main/internal/controller"
+)
 
 type API struct {
 	UserController controller.UserController

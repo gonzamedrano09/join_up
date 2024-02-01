@@ -5,9 +5,15 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"main/internal/config"
 )
 
 func main() {
+	// Load config
+	if err := config.LoadConfig(); err != nil {
+		return
+	}
+
 	// Create API
 	api := NewAPI()
 
