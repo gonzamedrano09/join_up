@@ -7,8 +7,8 @@ import (
 func mapRoutes(api *API, r *mux.Router) {
 
 	// Users
-	r.HandleFunc("/login", api.UserController.Login).Methods("POST")
-	r.HandleFunc("/users", api.UserController.Create).Methods("POST")
-	r.HandleFunc("/users", api.UserController.Update).Methods("PUT")
+	r.HandleFunc("/login", api.controllers.userController.Login).Methods("POST")
+	r.HandleFunc("/users", api.controllers.userController.Create).Methods("POST")
+	r.HandleFunc("/users", api.controllers.userController.Update).Methods("PUT")
 
 }
