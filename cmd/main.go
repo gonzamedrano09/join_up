@@ -4,18 +4,21 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gonzamedrano09/join_up/internal/config"
 	"github.com/gorilla/mux"
-	"main/internal/config"
 )
 
 func main() {
 	// Load config
 	if err := config.LoadConfig(); err != nil {
-		return
+		panic("error loading config")
 	}
 
 	// Create API
-	api := NewAPI()
+	api, err := NewAPI()
+	if err != nil {
+		panic(err)
+	}
 
 	// Create router
 	r := mux.NewRouter()
